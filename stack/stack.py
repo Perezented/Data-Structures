@@ -18,10 +18,17 @@ class Stack:
         self.storage = []
 
     def __len__(self):
+        # returning the length of the array.
         return len(self.storage)
 
     def push(self, value):
+        # want to append the value to the array
         return self.storage.append(value)
 
-    def pop(self):
-        return self.storage.pop()
+    def pop(self, value):
+        # if there are no items in the array, just return
+        if self.storage is None:
+            return
+        # want to return the top of the stack and delete the item.
+        else:
+            return self.storage.pop()
