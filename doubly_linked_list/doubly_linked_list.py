@@ -44,7 +44,7 @@ class DoublyLinkedList:
     """
     def add_to_head(self, value):
         # label a new node for the value
-        newNode = Node(value)
+        newNode = ListNode(value)
         # if there is no current head
         if self.head is None:
             # set it as the head and tail
@@ -60,7 +60,7 @@ class DoublyLinkedList:
     Returns the value of the removed Node.
     """
     def remove_from_head(self):
-        #     # set a const to the previous node, which was the head node before
+        #     # set a const to the previous node, which was the head node b4
         oldHead = self.head
         #     # make the next node the head node
         self.head = self.head.get_next()
@@ -77,28 +77,32 @@ class DoublyLinkedList:
     the old tail node's next pointer accordingly.
     """
     def add_to_tail(self, value):
-        pass
+        # set the value to a node
+        addingTail = ListNode(value)
+        # add it as the tail of the node list
+        self.tail.set_next(addingTail)
+        # remove the old tail and set it as the new node value.
+        self.tail = addingTail
             
     """
     Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
     Returns the value of the removed Node.
     """
-    def remove_from_tail(self):
         # FROM EARLIER...
-        # if we have an emply linked list
-        if self.head is None and self.tail is None:
+    def remove_tail(self):
+        if self.head is None:
             return
-        # if we have a non empty list
-        # set the tail to be none
+
         current = self.head
-        while current.get_next() is not self.tail:
+
+        while current.get_next() and current.get_next() is not self.tail:
             current = current.get_next()
-        val = self.tail.get_value() 
-        # move self.tail to the Node right before
+
+        value = self.tail.get_value()
         self.tail = current
-        return val
-            
+        self.tail.set_next(None)
+        return value
     """
     Removes the input node from its current spot in the 
     List and inserts it as the new head node of the List.
