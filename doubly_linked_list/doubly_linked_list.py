@@ -9,7 +9,19 @@ class ListNode:
         self.prev = prev
         self.value = value
         self.next = next
-            
+    
+    def get_value(self):
+        return self.value
+
+    def get_next(self):
+        return self.next
+
+    def set_next(self, new_next):
+        self.next = new_next
+
+    def get_prev(self):
+        return self.prev
+        
 """
 Our doubly-linked list class. It holds references to 
 the list's head and tail nodes.
@@ -48,19 +60,15 @@ class DoublyLinkedList:
     Returns the value of the removed Node.
     """
     def remove_from_head(self):
-        pass
-        # # if there is no head node, just return 
-        # if self.head is None:
-        #     return
-        # else:
+        #     # set a const to the previous node, which was the head node before
+        oldHead = self.head
         #     # make the next node the head node
-        #     self.head.next = self.head
-        #     # set a const to the previous node, which was the head node not no more
-        #     oldHead = self.head.prev
-        #     # remove the previous node
-        #     self.head.prev = None
-        #     # return said const
+        self.head = self.head.get_next()
+        # #     # remove the previous node
+        # self.head.prev = None
         #     return oldHead
+        return oldHead
+
 
 
     """
