@@ -24,4 +24,4 @@ class Stack:
         return self.storage.append(value)
 
     def pop(self):
-        pass
+        return self.storage.pop()
