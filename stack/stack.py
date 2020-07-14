@@ -27,12 +27,13 @@ class Stack:
         # update the size of the Stack
         self.size = self.size + 1
         # want to append the value to the array
-        return self.storage.insert(0, value)
+        return self.storage.append(value)
         
-    def pop(self, value):
+    def pop(self):
         # if there are no items in the array, just return
-        if self.storage is None:
-            return
+        if self.storage == []:
+            return None
         # want to return the top of the stack and delete the item.
         else:
-            return self.storage.pop(value)
+            self.size -= 1
+            return self.storage.pop()
