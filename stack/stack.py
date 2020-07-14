@@ -11,6 +11,8 @@ return elements in Last In First Out order.
    implementing a Stack?
 """
 
+# # FIFO
+
 
 class Stack:
     def __init__(self):
@@ -19,16 +21,18 @@ class Stack:
 
     def __len__(self):
         # returning the length of the array.
-        return len(self.storage)
+        return self.size
 
     def push(self, value):
+        # update the size of the Stack
+        self.size = self.size + 1
         # want to append the value to the array
-        return self.storage.append(value)
-
+        return self.storage.insert(0, value)
+        
     def pop(self, value):
         # if there are no items in the array, just return
         if self.storage is None:
             return
         # want to return the top of the stack and delete the item.
         else:
-            return self.storage.pop()
+            return self.storage.pop(value)

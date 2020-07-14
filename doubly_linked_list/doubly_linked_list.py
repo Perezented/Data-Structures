@@ -63,7 +63,7 @@ class DoublyLinkedList:
         #     # set a const to the previous node, which was the head node b4
         oldHead = self.head
         #     # make the next node the head node
-        self.head = self.head.get_next()
+        self.head = self.head.next
         # #     # remove the previous node
         # self.head.prev = None
         #     return oldHead
@@ -89,7 +89,7 @@ class DoublyLinkedList:
     current tail's previous node the new tail of the List.
     Returns the value of the removed Node.
     """
-        # FROM EARLIER...
+    # FROM EARLIER...
     def remove_tail(self):
         if self.head is None:
             return
@@ -108,7 +108,13 @@ class DoublyLinkedList:
     List and inserts it as the new head node of the List.
     """
     def move_to_front(self, node):
-        pass
+        # selecting the head as the current. attempting to locate the node
+        current = self.head
+        while current:
+            if current.get_value() == node:
+                self.head = current
+                current = None
+            return False
         
     """
     Removes the input node from its current spot in the 
