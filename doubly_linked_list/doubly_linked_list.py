@@ -9,8 +9,6 @@ class ListNode:
         self.prev = prev
         self.value = value
         self.next = next
-        self.head = None
-        self.tail = None
 
     def get_value(self):
         return self.value
@@ -18,27 +16,28 @@ class ListNode:
     def get_next(self):
         return self.next
 
+    def get_prev(self):
+        return self.prev
+
     def set_next(self, new_next):
         self.next = new_next
 
-    def get_prev(self):
-        return self.prev
-        
+    def set_prev(self, new_prev):
+        self.next = new_prev
 """
 Our doubly-linked list class. It holds references to 
 the list's head and tail nodes.
 """
 
-
 class DoublyLinkedList:
     def __init__(self, node=None):
         self.head = node
         self.tail = node
-        self.length = 0
+        self.length = 1 if node is not None else 0
 
     def __len__(self):
         return self.length
-
+    
     """
     Wraps the given value in a ListNode and inserts it
     as the new head of the list. Don't forget to handle
