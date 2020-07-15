@@ -9,10 +9,9 @@ class ListNode:
         self.prev = prev
         self.value = value
         self.next = next
-        self.length = 0
         self.head = None
         self.tail = None
-    
+
     def get_value(self):
         return self.value
 
@@ -39,7 +38,7 @@ class DoublyLinkedList:
 
     def __len__(self):
         return self.length
-    
+
     """
     Wraps the given value in a ListNode and inserts it
     as the new head of the list. Don't forget to handle
@@ -51,25 +50,26 @@ class DoublyLinkedList:
         # if there is no current head
         if self.head is None:
             # set it as the head and tail
+            self.length = 1
             self.head = newNode
             self.tail = newNode
-            self.length += 1
         # else if the self head is the self tail, only 1 item
-        elif self.head is self.tail:
+        elif self.tail.value == self.head.value:
+
+            self.length += 1
             self.head = newNode
             self.head.next = self.tail
             self.tail.prev = newNode
-            self.length += 1
         else:
             # otherwise, there are multiple items
+            # add one item to the length
+            self.length += 1
             # the previous head will need to connect to the new node
             self.head.prev = newNode
             # self.head will need to connect to the previous head
             self.head.prev.next = self.head
             # have the self head be new node
             self.head = newNode
-            # add one item to the length
-            self.length += 1
 
 
     """
