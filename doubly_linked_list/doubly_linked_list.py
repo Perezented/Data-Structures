@@ -9,6 +9,9 @@ class ListNode:
         self.prev = prev
         self.value = value
         self.next = next
+        self.length = 0
+        self.head = None
+        self.tail = None
     
     def get_value(self):
         return self.value
@@ -32,7 +35,7 @@ class DoublyLinkedList:
     def __init__(self, node=None):
         self.head = node
         self.tail = node
-        self.length = 1 if node is not None else 0
+        self.length = 0
 
     def __len__(self):
         return self.length
@@ -50,13 +53,24 @@ class DoublyLinkedList:
             # set it as the head and tail
             self.head = newNode
             self.tail = newNode
-        else:
-            # otherwise just set it as the node before the head node
-            self.head.prev = newNode
-            newNode.prev = None
-            newNode.next = self.head
-            self.head = newNode
             self.length += 1
+        # else if the self head is the self tail, only 1 item
+        elif self.head is self.tail:
+            self.head = newNode
+            self.head.next = self.tail
+            self.tail.prev = newNode
+            self.length += 1
+        else:
+            # otherwise, there are multiple items
+            # the previous head will need to connect to the new node
+            self.head.prev = newNode
+            # self.head will need to connect to the previous head
+            self.head.prev.next = self.head
+            # have the self head be new node
+            self.head = newNode
+            # add one item to the length
+            self.length += 1
+
 
     """
     Removes the List's current head node, making the
@@ -64,15 +78,23 @@ class DoublyLinkedList:
     Returns the value of the removed Node.
     """
     def remove_from_head(self):
-        #     # set a const to the previous node, which was the head node b4
-        oldHead = self.head
-        #     # make the next node the head node
-        self.head = self.head.next
-        # #     # remove the previous node
-        # self.head.prev = None
-        #     return oldHead
-        return oldHead
+        # if we have an empty list, no head and no tail, length is 0,  return
+        if self.head is None and self.tail is None:
+            self.length = 0
+        # else if there is no next item after head, set everything to None and length to 0
+        elif self.head == self.tail:
+            self.head = None
+            self.tail = None
+            self.length = 0
+        # else there is items afterward
+        else:
+            self.head = self.head.get_next()
+            self.length -= 1
+        return self.head
 
+
+
+        # set the next item to the head
 
 
     """

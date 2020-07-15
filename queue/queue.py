@@ -142,7 +142,7 @@ class Queue:
         else:
             # and remove the item in the front, index -1
             self.size = self.size - 1
-            return self.storage.pop()
+            return self.storage.pop(-1)
 
 # class Queue:
 #     def __init__(self):

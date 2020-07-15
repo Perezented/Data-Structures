@@ -17,7 +17,29 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
-        pass
+        # compare the input value with the value of the node
+        # if value < Node 's Value
+        if value < self.value:
+            # we need to go left
+            if self.left is None:
+            # if there is no left child, then we can wrap the value
+            #  in a BSTNode and park it
+                self.left = BSTNode(value)
+            else:
+            # otherwise there is a child
+            # call the left child's `insert` method
+                self.left.insert(value)
+
+        # otherwise, value > = Node's value
+        else:
+            # we need to go right
+            if self.right is None:
+            # if there is right child, then we can wrap the value
+            #  in a BSTNode and park it 
+                self.right = BSTNode(value)
+            # call the right child's `insert` method
+            else:
+                self.right.insert(value)
 
     # Return True if the tree contains the value
     # False if it does not

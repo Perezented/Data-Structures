@@ -145,7 +145,7 @@ class Stack:
         # want to return the top of the stack and delete the item.
         else:
             self.size -= 1
-            return self.storage.pop()
+            return self.storage.pop(-1)
 
 
 # class Stack:
