@@ -38,8 +38,8 @@ class DoublyLinkedList:
         return self.length
     
     """
-    Wraps the given value in a ListNode and inserts it 
-    as the new head of the list. Don't forget to handle 
+    Wraps the given value in a ListNode and inserts it
+    as the new head of the list. Don't forget to handle
     the old head node's previous pointer accordingly.
     """
     def add_to_head(self, value):
@@ -53,7 +53,11 @@ class DoublyLinkedList:
         else:
             # otherwise just set it as the node before the head node
             self.head.prev = newNode
+            newNode.prev = None
+            newNode.next = self.head
             self.head = newNode
+            self.length += 1
+
     """
     Removes the List's current head node, making the
     current head's next node the new head of the List.
