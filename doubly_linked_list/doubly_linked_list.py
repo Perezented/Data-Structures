@@ -29,6 +29,7 @@ Our doubly-linked list class. It holds references to
 the list's head and tail nodes.
 """
 
+
 class DoublyLinkedList:
     def __init__(self, node=None):
         self.head = node
@@ -53,7 +54,7 @@ class DoublyLinkedList:
             self.head = newNode
             self.tail = newNode
         # else if the self head is the self tail, only 1 item
-        elif self.tail.value == self.head.value:
+        elif not self.head.get_next():
 
             self.length += 1
             self.head = newNode
