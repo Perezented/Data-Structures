@@ -79,18 +79,14 @@ class DoublyLinkedList:
     """
     def remove_from_head(self):
         # if we have an empty list, no head and no tail, length is 0,  return
-        if self.head is None and self.tail is None:
-            self.length = 0
-        # else if there is no next item after head, set everything to None and length to 0
-        elif self.head == self.tail:
-            self.head = None
-            self.tail = None
-            self.length = 0
+        if self.head is None:
+            return
         # else there is items afterward
         else:
             self.head = self.head.get_next()
             self.length -= 1
-        return self.head
+            return self.head.get_prev()
+
 
 
 
