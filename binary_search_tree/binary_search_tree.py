@@ -43,19 +43,51 @@ class BSTNode:
 
     # Return True if the tree contains the value
     # False if it does not
-    def _search(self, target, currentNode):
-        if target == currentNode.value:
-            return True
-        elif target < currentNode.value and currentNode.left is not None:
-            return self._search(target, currentNode.left)
-        elif target > currentNode.value and currentNode.right is not None:
-            return self._search(target, currentNode.right)
 
     def contains(self, target):
         return self._search(target, self)
 
-    # Return the maximum value found in the tree
+    def _search(self, target, currentNode):
+        # if the current node is the target
+        if target == currentNode.value:
+            # return True
+            return True
+            # else if the target is less then the current node and there is a left node
+        elif target < currentNode.value and currentNode.left is not None:
+            # return this search on the target and left Node
+            return self._search(target, currentNode.left)
+            # else if the target is more then the current node and there is a right node
+        elif target > currentNode.value and currentNode.right is not None:
+            # return this search on the target and right Node
+            return self._search(target, currentNode.right)
 
+    ################################################
+    # def contains(self, target):
+    #     # 1. base case
+    #     # if the value of this node matches the target, then we have found what we are lookin for
+    #     if self.value == target:
+    #         return True
+    #     # 2. how do we move closer to the base case? 
+    #     # compare the target againsts this node's value ot determine which direction we need to go in 
+    #     if target < self.value:
+    #         # we need to go left
+    #         # what if there is no left child?
+    #         if not self.left:
+    #             return False
+    #         else:
+    #             # call contains on left 
+    #             self.left.contains(target)
+    #     if target > self.value:
+    #         # we need to go right
+    #         # what if there is no right child?
+
+    #         if not self.right:
+    #             return False
+    #         else:
+    #             # call contains on right 
+    #             self.right.contains(target)
+    ################################################
+    # Return the maximum value found in the tree
     def searchMax(self, currentNode):
         if currentNode.right:
             return self.searchMax(currentNode.right)
@@ -65,10 +97,40 @@ class BSTNode:
     def get_max(self):
         return self.searchMax(self)
 
+################################################
+    # def get_max(self):
+    #     # the max value in the tree will always be the right most value
+    #     # recursive
+    #     # just keep going right until there is no right child node
+    #     # base case:
+    #     if not self.right:
+    #         return self.value
+    #         # otherwise call get max on right child
+    #     elif self.right:
+    #         return getmax(self.right)
+################################################
     # Call the function `fn` on the value of each node
+    # def runEach(self, value, fn):
+    #     if value.value is not None:
+    #         fn(value.value)
+    #     if value.left is not None:
+    #         fn(value.left)
+    #         self.runEach(value, fn)
+    #     if value.right is not None:
+    #         value = value.right
+    #         self.runEach(value, fn)
 
     def for_each(self, fn):
-
+        # run the function on the first value
+        fn(self.value)
+        # if there is a left
+        if self.left:
+            # run it on left
+            self.left.for_each(fn)
+        # if there is a right
+        if self.right:
+            # run it on right
+            self.right.for_each(fn)
     # Part 2 -----------------------
 
     # Print all the values in order from low to high
