@@ -131,12 +131,54 @@ class BSTNode:
         if self.right:
             # run it on right
             self.right.for_each(fn)
+
+    def iterative_depth_first_for_each(self, fn):
+        # DFT: LIFO
+        # we will use a stack
+        stack = []
+        stack.append(self)
+        # so long a s our stack has nodes in it, theses more nodes to taverse
+        while len(stack) > 0:
+            # pop the tiop node from the stack
+            current = stack.pop()
+
+            # add the current node's right child
+            if current.right:
+                stack.append(current.right)
+            # add the current node's left child
+            if current.left:
+                stack.append(current.left)
+            # call the anon function
+            fn(current.value)
+
+    def iterative_breadth_first_for_each(self, fn):
+        from collections import deque
+        # bft: fifo
+        # we will use a queue to facilitate the ordering
+        queue = deque()
+        queue.append(self)
+        # continue to travese so long tas ther eare nodes in the queue
+        while len(queue > 0):
+            current = queue.popleft()
+            if current.left:
+                queue.append(current.left)
+            if current.right:
+                queue.append(current.right)
+            fn(current.value)
+
     # Part 2 -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        if node is None:
+            return
+        if node.left is not None:
+            self.in_order_print(node.left)
+        print(node.value)
+        if node.right is not None:
+            self.in_order_print(node.right)
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
