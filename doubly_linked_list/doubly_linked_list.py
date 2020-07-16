@@ -36,6 +36,7 @@ class DoublyLinkedList:
         self.tail = node
         self.length = 1 if node is not None else 0
 
+
     def __len__(self):
         return self.length
     
@@ -83,11 +84,14 @@ class DoublyLinkedList:
             return
         # else there is items afterward
         else:
-        # set the next item to the head
-            self.head = self.head.get_next()
+            # set the next item to the head
+            oldHead = self.head.value
+            if self.tail == self.head:
+                self.tail = None
+            self.head = self.head.next
             # remove an number from length
             self.length -= 1
-            return self.head.get_prev()
+            return oldHead
 
 
 
@@ -136,8 +140,9 @@ class DoublyLinkedList:
         # else if there is mult items
         else:
             # make tail prev the new tail
-            self.tail.prev = self.tail
-            returnMe = self.tail.next.value
+            returnMe = self.tail.value
+            self.tail = self.tail.prev
+            # returnMe = self.tail.next.value
             # make new tail next to none
             self.tail.next = None
             self.length -= 1
@@ -149,27 +154,75 @@ class DoublyLinkedList:
     List and inserts it as the new head node of the List.
     """
     def move_to_front(self, node):
-        # selecting the head as the current. attempting to locate the node
-        current = self.head
-        while current:
-            if current.get_value() == node:
-                self.head = current
-                current = None
-            return False
+        if node is self.head:
+            return
+        value = node.value
+        if node is self.tail:
+            self.remove_from_tail()
+            self.add_to_head(value)
+        else:
+            self.delete(node)
+            self.add_to_head(value)
         
-    """
-    Removes the input node from its current spot in the 
-    List and inserts it as the new tail node of the List.
-    """
+
+        """
+        Removes the input node from its current spot in the 
+        List and inserts it as the new tail node of the List.
+        """
+
     def move_to_end(self, node):
-        pass
+        if node is self.tail:
+            return
+        value = node.value
+        if node is self.head:
+            self.remove_from_head()
+            self.add_to_tail(value)
+        else:
+            self.delete(node)
+            self.add_to_tail(value)
+        # if self.tail is None:
+        #     return
+        # # if the item is the tail, just return
+        # if self.tail == node:
+        #     return
+        # # elif the item is the head, move it to the tail
+        # h = self.head
+        # t = self.tail
+        # if self.head == node:
+        #     self.head.set_prev(self.tail)
+        #     self.add_to_tail(self.head.value)
+        #     self.remove_from_head()
+        # else:
+        #     current = self.head.next
+        #     if current == node:
+        #         current.set_prev(self.tail)
+        #         current.set_next(None)
+        #         self.tail.set_next(current)
+        #         self.delete(node)
 
     """
     Deletes the input node from the List, preserving the 
     order of the other elements of the List.
     """
     def delete(self, node):
-        pass
+
+        currently = self.head.get_next()
+        if self.head == node:
+            self.remove_from_head()
+        elif self.tail == node:
+            self.remove_from_tail()
+        elif self.head != node:
+            if self.head.get_next() is not None:
+                if currently.get_value() == node:
+                    currently.get_prev().set_next(currently.get_next())
+                    currently.get_next().set_prev(currently.get_prev())
+                    currently.set_next(None)
+                    currently.set_prev(None)
+                    self.length -= 1
+                else:
+                    currently = currently.get_next()
+                    self.length -= 1
+
 
     """
     Finds and returns the maximum value of all the nodes 

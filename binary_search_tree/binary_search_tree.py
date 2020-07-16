@@ -179,11 +179,16 @@ class BSTNode:
         if node.right is not None:
             self.in_order_print(node.right)
 
-
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        if node is None:
+            return
+        print(node.value)
+        if node.left is not None:
+            self.bft_print(node.left)
+        if node.right is not None:
+            self.bft_print(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
